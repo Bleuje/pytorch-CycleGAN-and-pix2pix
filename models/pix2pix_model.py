@@ -3,6 +3,8 @@ from util.image_pool import ImagePool
 from .base_model import BaseModel
 from . import networks
 
+from scipy.misc import imsave
+import numpy as np
 
 class Pix2PixModel(BaseModel):
     def name(self):
@@ -62,8 +64,20 @@ class Pix2PixModel(BaseModel):
         self.real_B = input['B' if AtoB else 'A'].to(self.device)
         self.image_paths = input['A_paths' if AtoB else 'B_paths']
 
-    def forward(self):
+    def forward(self, b=False):
         self.fake_B = self.netG(self.real_A)
+        if(b):
+            cur = self.real_A
+            for i in range(200):
+                im = np.zeros((cur.shape[2],cur.shape[3],3))
+                im[:,:,0] = cur[0,:,:]
+                im[:,:,1] = cur[1,:,:]
+                im[:,:,2] = cur[2,:,:]
+                imsave('anim'+str(i)+'.png',im)
+                print('anim',i+1,'/',200)
+                cur = self.netG(cur)
+                
+                
 
     def backward_D(self):
         # Fake
