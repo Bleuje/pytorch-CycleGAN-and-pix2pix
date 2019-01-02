@@ -64,11 +64,11 @@ class Pix2PixModel(BaseModel):
         self.real_B = input['B' if AtoB else 'A'].to(self.device)
         self.image_paths = input['A_paths' if AtoB else 'B_paths']
 
-    def forward(self, b=False):
+    def forward(self, b=False, seed=0, length=200):
         self.fake_B = self.netG(self.real_A)
         if(b):
             cur = self.real_A
-            for i in range(200):
+            for i in range(length):
                 #im = np.zeros((cur.shape[2],cur.shape[3],3))
                 #im[:,:,0] = cur.cpu().numpy()[0,:,:]
                 #im[:,:,1] = cur.cpu().numpy()[1,:,:]
@@ -78,7 +78,7 @@ class Pix2PixModel(BaseModel):
                 im = np.swapaxes(im, 0, 2)
                 im = np.swapaxes(im, 0, 1)
                 print('image shape : ',im.shape)
-                imsave('anim'+str(i)+'.png',im)
+                imsave('animfiles/'+str(seed)+'anim'+str(i)+'.png',im)
                 print('anim',i+1,'/',200)
                 cur = self.netG(cur)
                 
