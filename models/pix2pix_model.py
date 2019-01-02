@@ -69,10 +69,13 @@ class Pix2PixModel(BaseModel):
         if(b):
             cur = self.real_A
             for i in range(200):
-                im = np.zeros((cur.shape[2],cur.shape[3],3))
-                im[:,:,0] = cur.cpu().numpy()[0,:,:]
-                im[:,:,1] = cur.cpu().numpy()[1,:,:]
-                im[:,:,2] = cur.cpu().numpy()[2,:,:]
+                #im = np.zeros((cur.shape[2],cur.shape[3],3))
+                #im[:,:,0] = cur.cpu().numpy()[0,:,:]
+                #im[:,:,1] = cur.cpu().numpy()[1,:,:]
+                #im[:,:,2] = cur.cpu().numpy()[2,:,:]
+                im = cur.cpu().numpy()
+                im = np.swapaxes(im, 0, 2)
+                im = np.swapaxes(im, 0, 1)
                 imsave('anim'+str(i)+'.png',im)
                 print('anim',i+1,'/',200)
                 cur = self.netG(cur)
