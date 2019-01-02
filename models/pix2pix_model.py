@@ -70,9 +70,9 @@ class Pix2PixModel(BaseModel):
             cur = self.real_A
             for i in range(200):
                 im = np.zeros((cur.shape[2],cur.shape[3],3))
-                im[:,:,0] = cur[0,:,:]
-                im[:,:,1] = cur[1,:,:]
-                im[:,:,2] = cur[2,:,:]
+                im[:,:,0] = cur[0,:,:].cpu().numpy()
+                im[:,:,1] = cur[1,:,:].cpu().numpy()
+                im[:,:,2] = cur[2,:,:].cpu().numpy()
                 imsave('anim'+str(i)+'.png',im)
                 print('anim',i+1,'/',200)
                 cur = self.netG(cur)
