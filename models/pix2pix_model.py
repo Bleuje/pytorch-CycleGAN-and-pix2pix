@@ -74,6 +74,7 @@ class Pix2PixModel(BaseModel):
                 #im[:,:,1] = cur.cpu().numpy()[1,:,:]
                 #im[:,:,2] = cur.cpu().numpy()[2,:,:]
                 im = cur.cpu().numpy()
+                im = im[0,:,:,:]
                 im = np.swapaxes(im, 0, 2)
                 im = np.swapaxes(im, 0, 1)
                 print('image shape : ',im.shape)
