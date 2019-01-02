@@ -64,6 +64,9 @@ class Pix2PixModel(BaseModel):
 
     def forward(self):
         self.fake_B = self.netG(self.real_A)
+        print('pix2pix_model forward')
+        print('entry shape :',self.real_A.shape)
+        print('output shape :',self.fake_B.shape)
 
     def backward_D(self):
         # Fake
