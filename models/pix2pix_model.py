@@ -68,6 +68,7 @@ class Pix2PixModel(BaseModel):
         self.fake_B = self.netG(self.real_A)
         if(b):
             cur = self.real_A
+            print("LENGTH :", length)
             for i in range(length):
                 #im = np.zeros((cur.shape[2],cur.shape[3],3))
                 #im[:,:,0] = cur.cpu().numpy()[0,:,:]
@@ -78,7 +79,7 @@ class Pix2PixModel(BaseModel):
                 im = np.swapaxes(im, 0, 2)
                 im = np.swapaxes(im, 0, 1)
                 #print('image shape : ',im.shape)
-                imsave('animfiles/'+str(seed)+'anim'+str(i)+'.png',im)
+                imsave('animfiles/'+str(seed)+'anim'+'{:04d}'.format(i) +'.png',im)
                 print('anim',i+1,'/',length)
                 cur = self.netG(cur)
                 
