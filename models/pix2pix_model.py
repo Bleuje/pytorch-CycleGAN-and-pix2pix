@@ -78,13 +78,13 @@ class Pix2PixModel(BaseModel):
                 im = im[0,:,:,:]
                 im = np.swapaxes(im, 0, 2)
                 im = np.swapaxes(im, 0, 1)
-				im2 = np.zeros((im.shape[0],im.shape[1],3))
-				im2[:,:,0] = im[:,:,0]
-				im2[:,:,1] = im[:,:,0]
-				im2[:,:,2] = im[:,:,0]
+                im2 = np.zeros((im.shape[0],im.shape[1],3))
+                im2[:,:,0] = im[:,:,0]
+                im2[:,:,1] = im[:,:,0]
+                im2[:,:,2] = im[:,:,0]
                 #print('image shape : ',im.shape)
                 imsave('animfiles/'+str(seed)+'anim'+'{:04d}'.format(i) +'.png',im)
-				imsave('animfiles/bw_'+str(seed)+'anim'+'{:04d}'.format(i) +'.png',im2)
+                imsave('animfiles/bw_'+str(seed)+'anim'+'{:04d}'.format(i) +'.png',im2)
                 print('anim',i+1,'/',length)
                 cur = self.netG(cur)
                 
