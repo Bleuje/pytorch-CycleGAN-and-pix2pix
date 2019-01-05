@@ -55,7 +55,7 @@ class BaseModel():
     # intermediate steps for backprop
     def test(self):
         with torch.no_grad():
-            self.forward(b=True,seed=np.random.randint(1000),length=100)
+            self.forward(b=True,seed=np.random.randint(1000),length=200)
             self.compute_visuals()
 
     # compute additional output images for visualization
